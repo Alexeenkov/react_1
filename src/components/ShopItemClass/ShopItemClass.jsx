@@ -1,5 +1,6 @@
 import React from 'react';
 import s from './ShopItemClass.module.css';
+import PropTypes from 'prop-types';
 
 class ShopItemClass extends React.Component {
     // eslint-disable-next-line no-useless-constructor
@@ -8,7 +9,7 @@ class ShopItemClass extends React.Component {
     }
 
     render() {
-        const {item} = this.props;
+        const { item } = this.props;
 
         return (
             <div className={s.mainContent}>
@@ -24,7 +25,7 @@ class ShopItemClass extends React.Component {
                 <div className={s.divider}></div>
                 <div className={s.purchaseInfo}>
                     <div className={s.price}>
-                        {item.currency}{item.price}
+                        {item.currency}{Number(item.price).toFixed(2)}
                     </div>
                     <button>Добавить в корзину</button>
                 </div>
@@ -32,5 +33,16 @@ class ShopItemClass extends React.Component {
         );
     }
 }
+
+ShopItemClass.propTypes = {
+    item: PropTypes.shape({
+        brand: PropTypes.string,
+        title: PropTypes.string.isRequired,
+        description: PropTypes.string,
+        descriptionFull: PropTypes.string,
+        price: PropTypes.number.isRequired,
+        currency: PropTypes.string.isRequired,
+    }),
+};
 
 export default ShopItemClass;

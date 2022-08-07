@@ -1,8 +1,9 @@
 import React from 'react';
 import s from './ShopItemFunc.module.css';
+import PropTypes from 'prop-types';
 
 const ShopItemFunc = (props) => {
-    const {item} = props;
+    const { item } = props;
 
     return (
         <div className={s.mainContent}>
@@ -18,12 +19,23 @@ const ShopItemFunc = (props) => {
             <div className={s.divider}></div>
             <div className={s.purchaseInfo}>
                 <div className={s.price}>
-                    {item.currency}{item.price}
+                    {item.currency}{Number(item.price).toFixed(2)}
                 </div>
                 <button>Добавить в корзину</button>
             </div>
         </div>
     );
 }
+
+ShopItemFunc.propTypes = {
+    item: PropTypes.shape({
+        brand: PropTypes.string,
+        title: PropTypes.string.isRequired,
+        description: PropTypes.string,
+        descriptionFull: PropTypes.string,
+        price: PropTypes.number.isRequired,
+        currency: PropTypes.string.isRequired,
+    }),
+};
 
 export default ShopItemFunc;
